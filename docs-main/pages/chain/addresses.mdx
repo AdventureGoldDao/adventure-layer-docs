@@ -1,0 +1,46 @@
+---
+title: Contract Addresses
+lang: en-US
+description: This reference guide lists all the contract addresses for Mainnet and Testnet.
+---
+
+import { Callout } from 'nextra/components'
+import { L1ContractTable } from '@/components/L1ContractTable'
+import { L2ContractTable } from '@/components/L2ContractTable'
+
+# Contract Addresses
+
+This reference guide lists all the contract addresses for Mainnet and Testnet, as found on the [superchain-registry](https://github.com/ethereum-optimism/superchain-registry/tree/main). 
+See the [Smart Contracts Overview](/stack/protocol/rollup/smart-contracts) for high-level details and access to the source code.
+
+<Callout>
+This page is automatically generated from packages in the [superchain-registry](https://github.com/ethereum-optimism/superchain-registry/tree/main) which keeps the content synched and up-to-date.
+</Callout>
+
+## Mainnet
+
+### Ethereum (L1)
+
+<L1ContractTable chain="10" explorer="1" legacy={false} />
+
+### Ethereum Legacy Contracts (L1)
+
+<L1ContractTable chain="10" explorer="1" legacy={true} />
+
+### Adventure Layer Testnet (L2)
+
+<L2ContractTable chain="10" legacy={false} />
+
+### Adventure Layer Testnet Legacy Contracts (L2)
+
+<L2ContractTable chain="10" legacy={true} />
+
+## Testnet (Sepolia)
+
+### Sepolia (L1)
+
+<L1ContractTable chain="11155420" explorer="11155111" legacy={false} />
+
+### OP Sepolia (L2)
+
+<L2ContractTable chain="11155420" legacy={false} />

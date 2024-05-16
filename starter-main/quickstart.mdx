@@ -1,0 +1,59 @@
+---
+title: "Quickstart"
+description: "Start developing your first World Engine game in under 5 minutes"
+---
+
+# Creating an L2 Rollup on Optimism
+
+This tutorial will guide you through the process of creating an L2 rollup on Optimism. 
+
+## Prerequisites
+
+- Basic understanding of blockchain and rollups.
+- Familiarity with Ethereum and Solidity.
+
+## Step 1: Set Up Your Development Environment
+
+Before you begin, ensure you have the following tools installed:
+
+- Node.js
+- pnpm
+
+You can install pnpm using the following command:
+
+```bash
+npm install -g pnpm
+```
+## Step 2: Clone the Optimism Repository
+
+Clone the Optimism monorepo from GitHub:
+
+```bash
+git clone https://github.com/ethereum-optimism/optimism.git
+cd optimism
+pnpm install
+```
+## Step 3: Configure the Rollup
+
+To configure your rollup, you will need to modify certain configuration files. For example, edit 'rollup.config.js' to specify the parameters for your rollup.
+
+```js
+// rollup.config.js
+export default {
+  input: 'src/index.js',
+  output: {
+    file: 'dist/bundle.js',
+    format: 'cjs',
+  },
+  plugins: [resolve(), commonjs()],
+};
+```
+## Step 4: Deploy the Rollup
+
+Deploy your rollup using the provided scripts. Make sure to follow the detailed steps in the documentation to correctly deploy your rollup.
+
+```bash
+pnpm run deploy
+```
+
+

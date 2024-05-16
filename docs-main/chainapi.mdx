@@ -1,0 +1,102 @@
+---
+title: "Our Chain API Documentation"
+description: "Explore the documentation for our blockchain's API and learn how to integrate with our platform"
+---
+
+## Our Chain API Documentation
+
+Welcome to the documentation for our blockchain's API! Here, you'll find comprehensive information on how to interact with our blockchain network programmatically. Whether you're a developer building decentralized applications or an enthusiast exploring blockchain technology, our API offers powerful capabilities to enhance your experience.
+
+### Base URL
+
+The base URL for accessing our chain API is:
+
+https://api.ourchain.com
+
+
+### Authentication
+
+To access certain endpoints on our chain API, you may require authentication. Authentication is typically done using API keys. Please refer to the specific endpoint documentation for authentication requirements.
+
+### Endpoints
+
+#### 1. **GET /blocks**
+
+Retrieve information about the latest blocks on the blockchain.
+
+**Example Request:**
+
+GET /blocks
+
+
+**Response:**
+
+```json
+[
+  {
+    "blockNumber": 1234,
+    "timestamp": 1621782165,
+    "transactions": [
+      {
+        "txHash": "0x123456789...",
+        "from": "0xabcdef...",
+        "to": "0x987654...",
+        "value": "10",
+        "timestamp": 1621782178
+      },
+      ...
+    ]
+  },
+  ...
+]
+```
+### 2. GET /transactions/{txHash}
+Retrieve details about a specific transaction using its transaction hash.
+
+Example Request:
+```
+GET /transactions/0x123456789...
+
+```
+Response:
+
+```json
+{
+  "txHash": "0x123456789...",
+  "from": "0xabcdef...",
+  "to": "0x987654...",
+  "value": "10",
+  "timestamp": 1621782178
+}
+```
+### 3. POST /transaction
+Submit a new transaction to be added to the blockchain.
+
+Example Request:
+
+``` bash
+POST /transaction
+
+{
+  "from": "0xabcdef...",
+  "to": "0x987654...",
+  "value": "10"
+}
+
+```
+Response:
+
+```json
+{
+  "txHash": "0x123456789...",
+  "status": "pending"
+}
+
+```
+## Rate Limits
+To ensure the stability and reliability of our chain API, rate limits are enforced. Please adhere to the rate limits specified in the response headers of API requests.
+
+## Conclusion
+Thank you for exploring our chain API documentation! We're excited to see what you'll build with our blockchain technology. If you have any questions or need further assistance, feel free to reach out to our support team. Happy coding!
+
+

@@ -1,0 +1,57 @@
+---
+title: "Creating Your Own L2 Rollup Testnet"
+description: "Learn how to create your own L2 Rollup Testnet using the Adventure Layer stack"
+---
+
+## Creating Your Own L2 Rollup Testnet
+
+**Please Note:** This page is currently undergoing maintenance. Code samples and solutions may not function as expected. Please check back for updates or sign up to help us revise this page. Your contributions are welcome! ❤️
+
+**Estimated Time:** Approximately one hour
+
+This tutorial is designed for developers interested in learning about the OP Stack by setting up an OP Stack testnet chain. You'll go through the entire deployment process, learning about all the components of the OP Stack and ending up with your very own OP Stack testnet.
+
+### What You're Going to Deploy
+
+When deploying an OP Stack chain, you'll set up four different components:
+
+1. **Smart Contracts**: Manage Rollup chains using L1 blockchain smart contracts.
+2. **Sequencer Node**: Gathers proposed transactions and publishes them to the L1 blockchain.
+3. **Consensus Client**: Determines the list and ordering of blocks and transactions.
+4. **Execution Client**: Executes transactions and updates the blockchain state.
+5. **Batcher**: Publishes transactions from the Sequencer to the L1 blockchain.
+6. **Proposer**: Publishes transaction results to the L1 blockchain.
+
+### Software Dependencies
+
+| Dependency   | Version | Version Check Command      |
+|--------------|---------|----------------------------|
+| git          | ^2      | `git --version`            |
+| go           | ^1.21   | `go version`               |
+| node         | ^20     | `node --version`           |
+| pnpm         | ^8      | `pnpm --version`           |
+| foundry      | ^0.2.0  | `forge --version`          |
+| make         | ^3      | `make --version`           |
+| jq           | ^1.6    | `jq --version`             |
+| direnv       | ^2      | `direnv --version`         |
+
+#### Notes on Specific Dependencies
+
+- **Node**: Use the latest LTS version (currently v20). Older versions may cause unexpected errors.
+- **Foundry**: Use scripts in the monorepo's package.json to manage foundry.
+- **Direnv**: Load environment variables from .envrc files into your shell. Make sure to properly hook direnv into your shell.
+
+### Get Access to a Sepolia Node
+
+To deploy an OP Stack Rollup chain, you'll use a Layer 1 blockchain like Sepolia to host and order transaction data. 
+
+### Build the Source Code
+
+#### Build the Adventure Layer Monorepo
+
+**Clone the Adventure Layer Monorepo:**
+
+```bash
+cd ~
+git clone https://github.com/ethereum-optimism/optimism.git
+```

@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'CustomFont'; /* 自定义字体的名称 */
+    src: url('/font/NeueHaasDisplayRoman.ttf') format('truetype'), /* 字体文件的路径 */
+         url('/font/NeueHaasDisplayRomanItalic.ttf') format('truetype');
+  }
+  
+  body {
+    font-family: 'CustomFont', sans-serif; /* 使用自定义字体 */
+  }
+
+  #navbar {
+    background: "#fffff2";
+    padding: 1rem;
+  }
+  
+  footer {
+    margin-top: 2rem;
+  }

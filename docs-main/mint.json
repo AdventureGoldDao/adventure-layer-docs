@@ -1,0 +1,53 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Adventure Layer",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png",
+    "href": "https://docs.adventurelayer.dev"
+    
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#E2975D",
+    "light": "#AC7412",
+    "dark": "#AC7412",
+    "anchors": {
+      "from": "#AC7412",
+      "to": "#ECB31E"
+    }
+  },
+  "api": {
+    "auth": {
+      "method": "bearer"
+    }
+  },
+
+
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true
+  },
+  "tabs": [
+
+  ],
+  "navigation": [
+    {
+      "group": "Developers",
+      "pages": [
+        {
+          "group": "Tutorials",
+          "pages": [
+            "pages/builders/chain-operators/architecture",
+            "pages/builders/app-developers/overview",
+            "pages//builders/app-developers/contracts/compatibility",
+            "pages/chain/testing/testing-apps"
+          ]
+        },
+        "Faucet",
+        "Bridge",
+        "chainapi"
+      ]
+    }
+  ]
+}

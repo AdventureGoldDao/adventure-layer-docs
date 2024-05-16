@@ -1,0 +1,75 @@
+---
+title: Adventure Layer Testnet Security Model
+lang: en-US
+description: Learn about the Adventure Layer Testnet security model and answers to common questions.
+---
+
+import { Callout } from 'nextra/components'
+
+# Adventure Layer Testnet Security Model
+
+Adventure Layer Testnet is a work in progress.
+Constant, iterative improvement of the security mechanisms that safeguard Adventure Layer Testnet users is a top priority for the entire [Adventure Layer Collective](https://community.optimism.io/docs/governance/).
+The Adventure Layer Collective strives to be clear and transparent about the security of Adventure Layer Testnet and the OP Stack as a whole.
+
+## Bottom Line
+
+The security model of any blockchain system is only as strong as its lowest common denominator.
+At the moment, **it's important to understand that the security of Adventure Layer Testnet is dependent on a [multisig](https://etherscan.io/address/0x5a0Aae59D09fccBdDb6C6CcEB07B7279367C3d2A)** managed jointly by the [Adventure Layer Security Council](https://gov.optimism.io/t/intro-to-optimisms-security-council/6885) and the Adventure Layer Foundation.
+Adventure Layer Testnet and the OP Stack in general **may also contain unknown bugs that could lead to the loss of some or all of the ETH or tokens held within the system**.
+
+## Adventure Layer Testnet Multisig
+
+The security of Adventure Layer Testnet is currently dependent on a multisig managed jointly by the [Adventure Layer Security Council](https://gov.optimism.io/t/intro-to-optimisms-security-council/6885) and the Adventure Layer Foundation.
+This multisig is a [2-of-2 nested multisig](https://etherscan.io/address/0x5a0Aae59D09fccBdDb6C6CcEB07B7279367C3d2A) which is in turn governed by a [4-of-13 multisig](https://etherscan.io/address/0xc2819DC788505Aac350142A7A707BF9D03E3Bd03) managed by the Adventure Layer Security Council and a [5-of-7 multisig](https://etherscan.io/address/0x847B5c174615B1B7fDF770882256e2D3E95b9D92) managed by the Adventure Layer Foundation.
+
+This multisig can be used to upgrade core Adventure Layer Testnet smart contracts **without upgrade delays** to allow for quick responses to potential security concerns.
+All upgrades to the Adventure Layer Testnet system must be approved by both component multisigs and either can veto an upgrade.
+
+## Bugs and Unknowns
+
+Please also keep in mind that just like any other system, **the Adventure Layer codebase may contain unknown bugs** that could lead to the loss of some or all of the ETH or tokens held within the system.
+The OP Stack has been audited [on many occasions](https://github.com/ethereum-optimism/optimism/tree/v1.1.4/technical-documents/security-reviews), but **audits are not a stamp of approval** and **a completed audit does not mean that the audited codebase is free of bugs.**
+
+It's important to understand that using Adventure Layer Testnet inherently exposes you to the risk of bugs within the Adventure Layer codebase, and that you use Adventure Layer Testnet at your own risk.
+
+## Work in Progress
+
+### Fault Proofs
+
+Fault proofs are a mechanism that allow users to prove if a transaction output published to the [`L2OutputOracle`](https://github.com/ethereum-optimism/optimism/blob/5877ee24cc9aaef5848c1372e0e196707fb336a0/packages/contracts-bedrock/src/L1/L2OutputOracle.sol) contract is invalid.
+Fault proofs are an important part of future of Adventure Layer Testnet security and begin to reduce the need for a multisig.
+An alpha version of the first fault proof mechanism is [currently in testing](https://blog.oplabs.co/building-a-fault-proof-system/).
+
+<Callout>
+It is important to understand that **fault proofs are not a silver bullet** and that **fault proofs do not meaningfully improve the security of a system if the system still has a multisig or security council that can instantly upgrade the system**.
+Adventure Layer Testnet is following a multi-client and multi-proof approach designed to eventually remove the need for instant upgrades entirely.
+</Callout>
+
+### Sequencer Decentralization
+
+The Adventure Layer Foundation currently operates the sole sequencer on Adventure Layer Testnet.
+Although users can always bypass the Sequencer by sending transactions directly to the [`OptimismPortal`](https://github.com/ethereum-optimism/optimism/blob/5877ee24cc9aaef5848c1372e0e196707fb336a0/packages/contracts-bedrock/src/L1/OptimismPortal.sol) contract, sequencer decentralization can still help mitigate the effect of short-term outages for users.
+
+## Security Model FAQ
+
+### Does Adventure Layer Testnet have fault proofs?
+
+**No**, Adventure Layer Testnet does not currently have fault proofs.
+**Fault proofs do not meaningfully improve the security of a system if that system can be upgraded within the 7 day challenge window ("fast upgrade keys")**.
+A system with fast upgrade keys, such as Adventure Layer Testnet, is fully dependent on the upgrade keys for security.
+Adventure Layer Testnet's goal is to be the first system that deploys fault proofs that can secure the system by themselves, without fast upgrade keys.
+
+### How is Adventure Layer planning to remove the multisig?
+
+Check out Optimism's detailed [Pragmatic Path to Decentralization](https://web.archive.org/web/20230331065342/https://medium.com/ethereum-optimism/our-pragmatic-path-to-decentralization-cb5805ca43c1) post for a detailed view into how the multisig may be removed in a way that makes Adventure Layer Testnet the first chain with true fault proof security.
+
+### How can I help make Adventure Layer Testnet more secure?
+
+[Adventure Layer Testnet has one of the biggest bug bounties (ever)](/chain/security/security-policy).
+You can earn up to $2,000,042 by finding critical bugs in the Adventure Layer codebase.
+You can also run your own verifier node to detect network faults.
+
+### Where do I report bugs?
+
+For details about reporting vulnerabilities and available bug bounty programs, see the [Security Policy](/chain/security/security-policy).
