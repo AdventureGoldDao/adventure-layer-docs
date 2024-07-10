@@ -2,6 +2,7 @@
 title: The Shards for The Adventure Layer
 description: The Adventure Layer is an innovative L2 chain designed to meet the demanding requirements of blockchain gaming. One of its key features is its sharding architecture, which enhances scalability and efficiency. Here, we introduce the shards for The Adventure Layer, detailing their components and access methods.
 ---
+
 **Shard Components:**
 
 **L2 Replica Node:**
@@ -38,13 +39,13 @@ description: The Adventure Layer is an innovative L2 chain designed to meet the 
 
 This architecture design improves network scalability, performance, and development flexibility while ensuring data security and consistency, making it suitable for blockchain application scenarios that require efficient processing of large numbers of transactions and complex smart contracts.
 
-**Accessing the Nodes:** To facilitate seamless interaction with these nodes, The Adventure Layer uses URL routing. Suppose the domain of our chain is `rpc.adventure.dev`. The nodes can be accessed through the following URLs:
+**Accessing the Nodes:** To facilitate seamless interaction with these nodes, The Adventure Layer uses URL routing. Suppose our node domain is rpc.adventure.dev. The nodes can be accessed through the following URLs:
 
 - **Replica Node:**
-    - URL: `http://rpc.adventure.dev/node1/replica`
-    - Description: This URL routes requests to the L2 replica node, ensuring efficient data retrieval and redundancy.
-- **Shard Node:**
-    - URL: `http://rpc.adventure.dev/node1/shard`
-    - Description: This URL routes requests to the shard node that supports WASM, providing a robust environment for executing complex computations and smart contracts.
+  - URL: `http://rpc.adventure.dev/{node}/replica`
+  - Description: This URL routes requests to the L2 replica node, ensuring efficient data retrieval and redundancy.
+- **Shard Node:** - URL: `http://rpc.adventure.dev/{node}/shard` - Description: This URL routes requests to the shard node that supports WASM, providing a robust environment for executing complex computations and smart contracts.
+  Unique Node Identifier:
+  In the context of The Adventure Layer, {node} serves as a placeholder for accessing specific nodes within the blockchain infrastructure. Depending on the context, replace {node} with the actual node identifier, such as node1. The path identifiers `replica` and `shard` direct requests to the L2 replica node and shard node, respectively.
 
 **Conclusion:** The shard architecture of The Adventure Layer, with its L2 replica node and WASM-supported shard node, ensures a scalable and efficient blockchain gaming environment. The URL routing system simplifies node access, making it easier for developers and users to interact with the chain.
