@@ -62,8 +62,7 @@
               "group": "Write Stylus contracts",
               "pages": [
                 "pages/sharding/WhriteStylusContract_Introduction",
-                "pages/sharding/WhriteStylusContract_Start",
-                "pages/sharding/Build1_ShardingNode"
+                "pages/sharding/WhriteStylusContract_Start"
               ]
              }
 
