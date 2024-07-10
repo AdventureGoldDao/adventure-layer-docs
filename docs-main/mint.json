@@ -46,7 +46,29 @@
         },
         "Faucet",
         "Bridge",
-        "chainapi"
+        "chainapi",
+        {
+          "group": "Sharding",
+          "pages": [
+            "pages/sharding/Introduction",
+             {
+              "group": "Build a Sharding node",
+              "pages": [
+                "pages/sharding/Build1_ShardingNode",
+                "pages/sharding/Build2_OpL2"
+              ]
+             },
+             {
+              "group": "Write Stylus contracts",
+              "pages": [
+                "pages/sharding/WhriteStylusContract_Introduction",
+                "pages/sharding/WhriteStylusContract_Start",
+                "pages/sharding/Build1_ShardingNode"
+              ]
+             }
+
+          ]
+        }
       ]
     }
   ]

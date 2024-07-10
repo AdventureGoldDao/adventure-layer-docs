@@ -1,0 +1,53 @@
+---
+title: How to run a Adventure Layer node
+---
+
+## How to run a Adventure Layer node
+
+**The Adventure Layer** is built upon an optimistic rollup framework chosen for its efficiency and compatibility with Ethereum L1. This layer serves as the base where transactions are batched and executed off-chain, with final state commitments made on Ethereum L1. This setup ensures that the core operations benefit from the security of the main Ethereum network while operating at greater speed and at a lower cost.
+
+### Step 1. Clone the [adventure-layer-scripts](https://github.com/DavidCoder88/adventure-layer-scripts) repo
+
+```
+  `git clone https://github.com/DavidCoder88/adventure-layer-scripts.git`
+```
+
+### Step 2. init
+
+```bash
+cp .envrc.example .envrc
+```
+
+### Step 3. update config run
+
+```bash
+sudo apt install direnv
+echo `eval "$(direnv hook bash)"` >> ~/.bashrc
+source ~/.bashrc
+
+direnv allow
+```
+
+### Step 4.sequencer
+
+```bash
+cd ./sequencer-node
+#init
+./init.sh
+#run
+./run-all.sh
+#stop
+./stop.sh
+```
+
+### Step 5.repolica
+
+```bash
+cd ./repolica-node
+#init
+./init.sh
+#run
+./run-all.sh
+#stop
+./stop.sh
+```
