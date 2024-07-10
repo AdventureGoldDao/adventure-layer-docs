@@ -50,19 +50,27 @@
         {
           "group": "Sharding",
           "pages": [
-            "pages/sharding/Introduction",
+            {
+              "group": "Introduction",
+              "pages": [
+                "pages/sharding/Introduction_1",
+                "pages/sharding/Introduction_2"
+              ]
+            },
              {
-              "group": "Build a Sharding node",
+              "group": "Building a shard node",
               "pages": [
                 "pages/sharding/Build1_ShardingNode",
                 "pages/sharding/Build2_OpL2"
               ]
              },
              {
-              "group": "Write Stylus contracts",
+              "group": "How to use the shard node",
               "pages": [
-                "pages/sharding/WhriteStylusContract_Introduction",
-                "pages/sharding/WhriteStylusContract_Start"
+                "pages/sharding/UseShard_1",
+                "pages/sharding/UseShard_2",
+                "pages/sharding/UseShard_3",
+                "pages/sharding/UseShard_4"
               ]
              }
 

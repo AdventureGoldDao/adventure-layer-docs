@@ -1,50 +1,61 @@
 ---
-title: How to run an Adventure Layer node
-description: The Adventure Layer is built upon an optimistic rollup framework chosen for its efficiency and compatibility with Ethereum L1. This layer serves as the base where transactions are batched and executed off-chain, with final state commitments made on Ethereum L1. This setup ensures that the core operations benefit from the security of the main Ethereum network while operating at greater speed and at a lower cost.
+title: How to run a replica node
 ---
 
-### Step 1. Clone the [adventure-layer-scripts](https://github.com/DavidCoder88/adventure-layer-scripts) repo
+### Step 1: Clone the [adventure-layer-scripts](https://github.com/DavidCoder88/adventure-layer-scripts) repository
 
+```bash
+git clone https://github.com/DavidCoder88/adventure-layer-scripts.git
 ```
-  `git clone https://github.com/DavidCoder88/adventure-layer-scripts.git`
-```
+- Use the `git clone` command to clone the `adventure-layer-scripts` repository from GitHub. This will download all files from the repository to your local machine.
 
-### Step 2. init
+### Step 2: Initialize the environment configuration
 
 ```bash
 cp .envrc.example .envrc
 ```
+- Copy the `.envrc.example` file to `.envrc`. This file contains example configurations for environment variables that you can modify as needed.
 
-### Step 3. update config run
+### Step 3: Update configuration and run
 
 ```bash
 sudo apt install direnv
-echo `eval "$(direnv hook bash)"` >> ~/.bashrc
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
 source ~/.bashrc
 
 direnv allow
 ```
+- Install the `direnv` tool, which automatically loads and unloads environment variables specific to the directory.
+- Add the `direnv` hook to your `.bashrc` file and reload `.bashrc` to enable `direnv` in the current shell session.
+- Run `direnv allow` to allow `direnv` to load environment variables from the `.envrc` file.
 
-### Step 4.sequencer
-
-```bash
-cd ./sequencer-node
-#init
-./init.sh
-#run
-./run-all.sh
-#stop
-./stop.sh
-```
-
-### Step 5.repolica
+### Step 4: Run the Replica Node
 
 ```bash
 cd ./repolica-node
-#init
+# init
 ./init.sh
-#run
+# run
 ./run-all.sh
-#stop
+# stop
 ./stop.sh
 ```
+1. **Navigate to the directory**: Use the `cd ./repolica-node` command to navigate to the `repolica-node` directory.
+
+2. **Initialize**:
+    ```bash
+    ./init.sh
+    ```
+    - Run the `./init.sh` script to initialize the Replica Node. This typically involves setting up necessary files and configurations.
+
+3. **Run**:
+    ```bash
+    ./run-all.sh
+    ```
+    - Run the `./run-all.sh` script to start the Replica Node. This script will start all necessary processes and services, allowing the node to begin running and handling requests.
+
+4. **Stop**:
+    ```bash
+    ./stop.sh
+    ```
+    - Run the `./stop.sh` script to stop the Replica Node. This script will stop all related processes and services, ensuring the node shuts down safely.

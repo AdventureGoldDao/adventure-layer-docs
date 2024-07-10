@@ -1,0 +1,60 @@
+---
+title: Deploying Contracts
+---
+
+### Deploying Contracts with Stylus CLI
+
+1. **Install Rust Toolchain**: Ensure you have Rust installed by following the instructions on the [Rust Lang installation page](https://www.rust-lang.org/tools/install). Confirm that `rustup`, `rustc`, and `cargo` are accessible from your command line.
+
+2. **Set Up VS Code**: Use VS Code for your development environment, leveraging its strong support for Rust. Install helpful extensions like `rust-analyzer`, `Error Lens`, `Even Better TOML`, and `crates` to enhance your development workflow.
+
+3. **Acquire Testnet ETH**: You'll need testnet ETH (Sepolia ETH) for deploying your Rust contracts. Obtain it from [Bware Labs faucet](https://bwarelabs.com/faucets/arbitrum-stylus-testnet) or other sources mentioned.
+
+4. **Create Developer Wallet**: Use a fresh MetaMask account labeled as a dev wallet or "Stylus". Follow MetaMask's guidelines to obtain the private key for this account, ensuring it contains only testnet assets.
+
+5. **Install Stylus CLI**: Once Rust is installed, install the Stylus CLI tool (`cargo-stylus`) with the following command:
+   ```sh
+   cargo install --force cargo-stylus cargo-stylus-check
+   ```
+   Ensure `wasm32-unknown-unknown` is added as a Rust target:
+   ```sh
+   rustup target add wasm32-unknown-unknown
+   ```
+
+6. **Develop and Validate Contracts**: Start a new Stylus project using:
+   ```sh
+   cargo stylus new <YOUR_PROJECT_NAME>
+   ```
+   Alternatively, for a minimal setup, use:
+   ```sh
+   cargo stylus new --minimal <YOUR_PROJECT_NAME>
+   ```
+
+7. **Check Project Validity**: Validate your project's readiness for deployment with:
+   ```sh
+   cargo stylus check
+   ```
+   Adjust parameters as needed to ensure compatibility with the JSON-RPC endpoint.
+
+8. **Deploy Your Contract**: Estimate gas requirements with:
+   ```sh
+   cargo stylus deploy --private-key-path=<PRIVKEY_FILE_PATH> --estimate-gas-only
+   ```
+   Then deploy with:
+   ```sh
+   cargo stylus deploy --private-key-path=<PRIVKEY_FILE_PATH>
+   ```
+
+   Follow the prompts to finalize deployment and activate your contract on the designated address.
+
+9. **Deploy Non-Rust WASM Projects**: You can deploy projects written in non-Rust languages (like C) by specifying the WASM file directly:
+   ```sh
+   cargo stylus deploy --priv-key-path=<YOUR PRIV KEY FILE PATH> --wasm-file-path=add.wat
+   ```
+
+10. **Export Solidity ABIs**: For projects using the Stylus SDK, export Solidity ABIs easily with:
+    ```sh
+    cargo stylus export-abi
+    ```
+    This command simplifies integration with other Ethereum-based projects.
+
