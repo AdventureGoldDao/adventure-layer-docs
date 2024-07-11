@@ -57,7 +57,7 @@
                 "pages/sharding/Introduction_2"
               ]
             },
-             {
+            {
               "group": "Building a shard node",
               "pages": [
                 "pages/sharding/Build1_ShardingNode",
@@ -71,6 +71,13 @@
                 "pages/sharding/UseShard_2",
                 "pages/sharding/UseShard_3",
                 "pages/sharding/UseShard_4"
+              ]
+             },
+             {
+              "group": "APIs Description",
+              "pages": [
+                "pages/sharding/APIs_AL",
+                "pages/sharding/APIs_ETH"
               ]
              }
 
