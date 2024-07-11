@@ -1,0 +1,242 @@
+---
+title: Adventure Layer JSON-RPC API
+---
+
+### The default block parameter
+
+The following methods have an extra default block parameter:
+
+- [al_getBalance](#al_getBalance)
+- [al_getCode](#al_getCode)
+- [al_getTransactionCount](#al_getTransactionCount)
+- [al_getStorageAt](#al_getStorageAt)
+- [al_getStorageAt](#al_getStorageAt)
+
+When requests are made that act on the state of Ethereum, the last default block parameter determines the height of the block.
+
+The following options are possible for the defaultBlock parameter:
+
+- `HEX String` - an integer block number
+- `String "earliest"` for the earliest/genesis block
+- `String "latest"` - for the latest mined block
+- `String "safe"` - for the latest safe head block
+- `String "finalized"` - for the latest finalized block
+- `String "pending"` - for the pending state/transactions
+
+### State Methods
+
+> Methods that report the current state of all the data stored. The "state" is like one big shared piece of RAM, and includes account balances, contract data, and gas estimations.
+
+- [al_getBalance](#al_getBalance)
+- [al_getStorageAt](#al_getStorageAt)
+- [al_getTransactionCount](#al_getTransactionCount)
+- [al_getCode](#al_getCode)
+- [al_getStorageAt](#al_getStorageAt)
+- [al_estimateGas](#al_estimateGas)
+
+### al_getBalance
+
+Returns the balance of the account of given address.
+
+**Parameters**
+
+1. `DATA`, 20 Bytes - address to check for balance.
+2. `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"`, `"pending"`, `"safe"`, or `"finalized"`, see the [default block parameter](the-default-block-parameter).
+
+```
+params: ["0x407d73d8a49eeb85d32cf465507dd71d507100c1", "latest"]
+```
+
+**Returns**
+
+`QUANTITY` - integer of the current balance in wei.
+
+**Example**
+
+```
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"al_getBalance","params":["0x407d73d8a49eeb85d32cf465507dd71d507100c1", "latest"],"id":1}'
+// Result
+{
+	"id":1,
+	"jsonrpc": "2.0",
+	"result": "0x0234c8a3397aab58" // 158972490234375000
+}
+
+```
+
+### al_getStorageAt
+
+Returns the value from a storage position at a given address.
+
+**Parameters**
+
+1. `DATA`, 20 Bytes - address of the storage.
+2. `QUANTITY` - integer of the position in the storage.
+3. `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"`, `"pending"`, `"safe"`, `"finalized"`, see the [default block parameter](#the-default-block-parameter)
+
+**Returns**
+
+`DATA` - the value at this storage position.
+
+**Example** Calculating the correct position depends on the storage to retrieve. Consider the following contract deployed at `0x295a70b2de5e3953354a6a8344e616ed314d7251` by address `0x391694e7e0b0cce554cb130d723a9d27458f9298`.
+
+```
+ contract Storage {
+   uint pos0;
+   mapping(address => uint) pos1;
+   function Storage() {
+    pos0 = 1234;
+	pos1[msg.sender] = 5678;
+ }
+```
+
+Retrieving the value of pos0 is straight forward:
+
+```
+curl -X POST --data '{"jsonrpc":"2.0", "method": "al_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "latest"], "id": 1}' localhost:8545 {"jsonrpc":"2.0","id":1,"result":"0x00000000000000000000000000000000000000000000000000000000000004d2"}
+```
+
+Retrieving an element of the map is harder. The position of an element in the map is calculated with:
+
+```
+keccak(LeftPad32(key, 0), LeftPad32(map position, 0))
+```
+
+This means to retrieve the storage on pos1["0x391694e7e0b0cce554cb130d723a9d27458f9298"] we need to calculate the position with:
+
+```
+keccak( decodeHex( "000000000000000000000000391694e7e0b0cce554cb130d723a9d27458f9298" + "0000000000000000000000000000000000000000000000000000000000000001" ) )
+```
+
+The geth console which comes with the web3 library can be used to make the calculation:
+
+```
+> var key = "000000000000000000000000391694e7e0b0cce554cb130d723a9d27458f9298" + "0000000000000000000000000000000000000000000000000000000000000001"
+   undefined
+>  web3.sha3(key, {"encoding": "hex"}) "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9"
+```
+
+Now to fetch the storage:
+
+```
+curl -X POST --data '{"jsonrpc":"2.0", "method": "al_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9", "latest"], "id": 1}' localhost:8545 {"jsonrpc":"2.0","id":1,"result":"0x000000000000000000000000000000000000000000000000000000000000162e"}
+```
+
+### al_getTransactionCount
+
+Returns the number of transactions *sent* from an address.
+
+**Parameters**
+
+1. `DATA`, 20 Bytes - address.
+2. `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"`, `"pending"`, `"safe"` or `"finalized"`,see [the default block parameter](#the-default-block-parameter).
+
+```
+params: [
+	"0x407d73d8a49eeb85d32cf465507dd71d507100c1",
+	"latest", // state at the latest block
+]
+```
+
+**Returns**
+
+`QUANTITY` - integer of the number of transactions in this block.
+
+**Example**
+
+```
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByHash","params":["0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id":1}'
+// Result
+{
+	"id":1,
+	"jsonrpc": "2.0",
+	"result": "0xb" // 11
+}
+
+```
+
+### al_getCode
+
+Returns code at a given address.
+
+**Parameters**
+
+1. `DATA`, 20 Bytes - address
+2. `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"`, `"pending"`, `"safe"` or `"finalized"`,see [the default block parameter](#the-default-block-parameter).
+
+```
+params: [
+	"0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
+	"0x2", // 2
+]
+```
+
+**Returns**
+
+`DATA` - the code from the given address.
+
+**Example**
+
+```
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"al_getCode","params":["0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", "0x2"],"id":1}'
+// Result
+{
+"id":1,
+"jsonrpc": "2.0",
+"result":"0x600160008035811a818181146012578301005b601b6001356025565b8060005260206000f25b600060078202905091905056"
+}
+```
+
+### al_getStorageAt
+
+Executes a new message call immediately without creating a transaction on the block chain. Often used for executing read-only smart contract functions, for example the `balanceOf` for an ERC-20 contract.
+
+**Parameters**
+
+1. `Object` - The transaction call object
+
+- `from`: `DATA`, 20 Bytes - (optional) The address the transaction is sent from.
+- `to`: `DATA`, 20 Bytes - The address the transaction is directed to.
+- `gas`: `QUANTITY` - (optional) Integer of the gas provided for the transaction execution. al_getStorageAt consumes zero gas, but this parameter may be needed by some executions.
+- `gasPrice`: `QUANTITY` - (optional) Integer of the gasPrice used for each paid gas
+- `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
+- `input`: `DATA` - (optional) Hash of the method signature and encoded parameters. For details see [Ethereum Contract ABI in the Solidity documentation(opens in a new tab)](https://docs.soliditylang.org/en/latest/abi-spec.html).
+
+2. `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"`, `"pending"`, `"safe"` or `"finalized"`, see [the default block parameter](#the-default-block-parameter).
+
+**Returns**
+
+`DATA` - the return value of executed contract.
+
+**Example**
+
+```
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"al_getStorageAt","params":[{see above}],"id":1}'
+// Result
+{ "id":1, "jsonrpc": "2.0", "result": "0x" }
+```
+
+### al_estimateGas
+
+Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
+
+**Parameters**
+
+See [al_getStorageAt](#al_getStorageAt) parameters, except that all properties are optional. If no gas limit is specified geth uses the block gas limit from the pending block as an upper bound. As a result the returned estimate might not be enough to executed the call/transaction when the amount of gas is higher than the pending block gas limit.
+
+**Returns**
+
+`QUANTITY` - the amount of gas used.
+
+**Example**
+
+```
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"al_estimateGas","params":[{see above}],"id":1}'
+// Result
+{ "id":1, "jsonrpc": "2.0", "result": "0x5208" // 21000 }
+```

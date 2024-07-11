@@ -1,0 +1,338 @@
+---
+title: Ethereum JSON-RPC API
+description: For more detailed information, you can refer to the [Ethereum JSON-RPC documentation on GitHub](https://github.com/etclabscore/ethereum-json-rpc-specification) or the [Ethereum Wiki](https://github.com/ethereum/wiki/wiki/JSON-RPC).
+---
+
+## JSON-RPC API Methods
+
+### 1. **Web3 Namespace**
+
+#### `web3_clientVersion`
+
+- **Description**: Returns the current client version.
+- **Parameters**: None
+- **Returns**: `String` - Client version
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "web3_clientVersion",
+    "params": [],
+    "id": 1
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "Geth/v1.9.25-stable-..."
+  }
+  ```
+
+#### `web3_sha3`
+
+- **Description**: Returns the Keccak-256 (SHA3) of the given data.
+- **Parameters**: `String` - Data to be hashed
+- **Returns**: `Data` - Keccak-256 hash of the input data
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "web3_sha3",
+    "params": ["0x68656c6c6f20776f726c64"],
+    "id": 1
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "0x47173285a8d730..."
+  }
+  ```
+
+### 2. **Net Namespace**
+
+#### `net_version`
+
+- **Description**: Returns the current network ID.
+- **Parameters**: None
+- **Returns**: `String` - Network ID
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "net_version",
+    "params": [],
+    "id": 67
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 67,
+    "result": "1"
+  }
+  ```
+
+#### `net_peerCount`
+
+- **Description**: Returns the number of peers currently connected to the client.
+- **Parameters**: None
+- **Returns**: `Quantity` - Number of connected peers
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "net_peerCount",
+    "params": [],
+    "id": 74
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 74,
+    "result": "0x2"
+  }
+  ```
+
+#### `net_listening`
+
+- **Description**: Returns `true` if the client is actively listening for network connections.
+- **Parameters**: None
+- **Returns**: `Boolean` - Listening status
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "net_listening",
+    "params": [],
+    "id": 67
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 67,
+    "result": true
+  }
+  ```
+
+### 3. **Eth Namespace**
+
+#### `eth_protocolVersion`
+
+- **Description**: Returns the current Ethereum protocol version.
+- **Parameters**: None
+- **Returns**: `String` - Protocol version
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "eth_protocolVersion",
+    "params": [],
+    "id": 67
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 67,
+    "result": "0x41"
+  }
+  ```
+
+#### `eth_syncing`
+
+- **Description**: Returns an object with data about the sync status or `false`.
+- **Parameters**: None
+- **Returns**: `Boolean` or `Object` - Sync status
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "eth_syncing",
+    "params": [],
+    "id": 1
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+      "startingBlock": "0x384",
+      "currentBlock": "0x386",
+      "highestBlock": "0x454"
+    }
+  }
+  ```
+
+#### `eth_gasPrice`
+
+- **Description**: Returns the current price per gas in wei.
+- **Parameters**: None
+- **Returns**: `Quantity` - Gas price in wei
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "eth_gasPrice",
+    "params": [],
+    "id": 73
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 73,
+    "result": "0x09184e72a000"
+  }
+  ```
+
+#### `eth_blockNumber`
+
+- **Description**: Returns the number of the most recent block.
+- **Parameters**: None
+- **Returns**: `Quantity` - Block number
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "eth_blockNumber",
+    "params": [],
+    "id": 83
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 83,
+    "result": "0x4b7"
+  }
+  ```
+
+#### `eth_getBlockByNumber`
+
+- **Description**: Returns information about a block by block number.
+- **Parameters**:
+  - `String` - Block number or one of the string tags `latest`, `earliest`, `pending`
+  - `Boolean` - If `true` it returns the full transaction objects, if `false` only the hashes of the transactions
+- **Returns**: `Object` - Block information
+- **Example**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "method": "eth_getBlockByNumber",
+    "params": [
+      "0x1b4",
+      true
+    ],
+    "id": 1
+  }
+  ```
+  **Response**:
+  ```json
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+      "number": "0x1b4",
+      "hash": "0x1234...",
+      "parentHash": "0x5678...",
+      "nonce": "0x0000000000000000",
+      "sha3Uncles": "0x1dcc4...",
+      "logsBloom": "0x0000...",
+      "transactionsRoot": "0x56e8...",
+      "stateRoot": "0x7b3e...",
+      "receiptsRoot": "0x56e8...",
+      "miner": "0x0000000000000000000000000000000000000000",
+      "difficulty": "0x027f07",
+      "totalDifficulty": "0x027f07",
+      "extraData": "0x00",
+      "size": "0x027f07",
+      "gasLimit": "0x9f759",
+      "gasUsed": "0x9f759",
+      "timestamp": "0x54e34e8e",
+      "transactions": [{
+        "hash": "0x1234...",
+        "nonce": "0x15",
+        "blockHash": "0x1234...",
+        "blockNumber": "0x1b4",
+        "transactionIndex": "0x1",
+        "from": "0x1234...",
+        "to": "0x5678...",
+        "value": "0x1",
+        "gas": "0x5208",
+        "gasPrice": "0x3b9aca00",
+        "input": "0x"
+      }],
+      "uncles": []
+    }
+  }
+  ```
+
+#### `eth_getTransactionByHash`
+
+- **Description**: Retrieves detailed information about a transaction specified by its hash.
+- **Parameters**:
+  - `Hash` (String): The transaction hash to retrieve, represented as a hexadecimal string.
+- **Returns**:
+  - `Object`: An object containing the following fields about the transaction:
+    - `blockHash` (String): The hash of the block where the transaction is included.
+    - `blockNumber` (String): The number of the block where the transaction is included.
+    - `from` (String): The address of the sender of the transaction.
+    - `gas` (String): The amount of gas used by the transaction.
+    - `gasPrice` (String): The gas price in wei used for each unit of gas.
+    - `hash` (String): The transaction hash.
+    - `input` (String): The input data of the transaction, typically used for invoking smart contracts.
+    - `nonce` (String): The nonce of the sender's account.
+    - `to` (String): The address of the receiver of the transaction. It is empty if the transaction is a contract creation.
+    - `transactionIndex` (String): The index of the transaction within the block.
+    - `value` (String): The amount of Ether transferred in the transaction, represented in wei.
+- **Example**:
+
+**Request**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "eth_getTransactionByHash",
+  "params": [
+    "0x4bc7f80482d38e6ee3e48e5d46697e66b5d18909a0c7f59d6cfa4bc5f77c6334"
+  ],
+  "id": 1
+}
+```
+
+**Response**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "blockHash": "0x6fd9c2d0aef8cbf49d56a0d8108d0c6f7aaab33fa47c287b18a8e0fdd9f1a95b",
+    "blockNumber": "0x5BAD55",
+    "from": "0xc94770007dda54cF92009BFF0dE90c06F603a09f",
+    "gas": "0xc350",
+    "gasPrice": "0x4A817C800",
+    "hash": "0x4bc7f80482d38e6ee3e48e5d46697e66b5d18909a0c7f59d6cfa4bc5f77c6334",
+    "input": "0x68656c6c6f21",
+    "nonce": "0x15",
+    "to": "0x5c504ed432cb51138bcf08aa2f8622e54f03c2b4",
+    "transactionIndex": "0x0",
+    "value": "0x7f110"
+  }
+}
+```
