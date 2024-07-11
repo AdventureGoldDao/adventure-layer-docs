@@ -2,7 +2,7 @@
 title: Deploying Contracts
 ---
 
-### Deploying Contracts with Stylus CLI
+## Deploying Contracts with Stylus CLI
 
 1. **Install Rust Toolchain**: Ensure you have Rust installed by following the instructions on the [Rust Lang installation page](https://www.rust-lang.org/tools/install). Confirm that `rustup`, `rustc`, and `cargo` are accessible from your command line.
 
@@ -39,6 +39,7 @@ title: Deploying Contracts
 7. **Check Project Validity**: Validate your project's readiness for deployment with:
 
    ```sh
+   cd <YOUR_PROJECT_NAME>
    cargo stylus check
    ```
 
@@ -47,12 +48,14 @@ title: Deploying Contracts
 8. **Deploy Your Contract**: Estimate gas requirements with:
 
    ```sh
+   cd <YOUR_PROJECT_NAME>
    cargo stylus deploy --private-key-path=<PRIVKEY_FILE_PATH> --estimate-gas-only
    ```
 
    Then deploy with:
 
    ```sh
+   cd <YOUR_PROJECT_NAME>
    cargo stylus deploy --private-key-path=<PRIVKEY_FILE_PATH>
    ```
 
@@ -61,14 +64,42 @@ title: Deploying Contracts
 9. **Deploy Non-Rust WASM Projects**: You can deploy projects written in non-Rust languages (like C) by specifying the WASM file directly:
 
    ```sh
+   cd <YOUR_PROJECT_NAME>
    cargo stylus deploy --priv-key-path=<YOUR PRIV KEY FILE PATH> --wasm-file-path=add.wat
    ```
 
 10. **Export Solidity ABIs**: For projects using the Stylus SDK, export Solidity ABIs easily with:
     ```sh
+    cd <YOUR_PROJECT_NAME>
     cargo stylus export-abi
     ```
     This command simplifies integration with other Ethereum-based projects.
+
+## Deploying Contracts with scripts
+
+1. Complete steps 1-5 above to set up the required environment (Rust and Cargo).
+
+2. **Clone the Repository**: First, clone the adventure-layer-scripts repository to your local machine:
+
+   ```sh
+   git clone https://github.com/DavidCoder88/adventure-layer-scripts.git
+   ```
+
+3. **Initialize the Environment**: Navigate to the `stylus-demos` directory and set up your environment:
+
+   ```sh
+   cd adventure-layer-scripts/stylus-demos
+   cp ./scripts.env.example .env
+   ```
+
+4. **Deploy the Contract**: Use the provided script to deploy your contract:
+   ```sh
+   ./scripts/deploy.sh
+   ```
+5. **Export Solidity ABIs**: Get the contract ABI using the script provided:
+   ```sh
+   ./scripts/abi.sh
+   ```
 
 ## Accessing the Shard Node:
 
