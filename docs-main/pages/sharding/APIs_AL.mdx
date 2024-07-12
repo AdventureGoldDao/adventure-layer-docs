@@ -1,16 +1,16 @@
 ---
-title: Adventure Layer JSON-RPC API
+title: Adventure Layer API
 ---
 
 ### The default block parameter
 
 The following methods have an extra default block parameter:
 
-- [al_getBalance](#al_getBalance)
-- [al_getCode](#al_getCode)
-- [al_getTransactionCount](#al_getTransactionCount)
-- [al_getStorageAt](#al_getStorageAt)
-- [al_getStorageAt](#al_getStorageAt)
+- [al_getBalance](#al-getbalance)
+- [al_getCode](#al-getcode)
+- [al_getTransactionCount](#al-gettransactioncount)
+- [al_getStorageAt](#al-getstorageat)
+- [al_call](#al-call)
 
 When requests are made that act on the state of Ethereum, the last default block parameter determines the height of the block.
 
@@ -27,11 +27,11 @@ The following options are possible for the defaultBlock parameter:
 
 > Methods that report the current state of all the data stored. The "state" is like one big shared piece of RAM, and includes account balances, contract data, and gas estimations.
 
-- [al_getBalance](#al_getBalance)
-- [al_getStorageAt](#al_getStorageAt)
-- [al_getTransactionCount](#al_getTransactionCount)
-- [al_getCode](#al_getCode)
-- [al_getStorageAt](#al_getStorageAt)
+- [al_getBalance](#al_getbalance)
+- [al_getStorageAt](#al-getstorageat)
+- [al_getTransactionCount](#al-getransactioncount)
+- [al_getCode](#al-getcode)
+- [al_call](#al-call)
 - [al_estimateGas](#al_estimateGas)
 
 ### al_getBalance
@@ -226,7 +226,7 @@ Generates and returns an estimate of how much gas is necessary to allow the tran
 
 **Parameters**
 
-See [al_getStorageAt](#al_getStorageAt) parameters, except that all properties are optional. If no gas limit is specified geth uses the block gas limit from the pending block as an upper bound. As a result the returned estimate might not be enough to executed the call/transaction when the amount of gas is higher than the pending block gas limit.
+See [al_getStorageAt](#al-getstorageat) parameters, except that all properties are optional. If no gas limit is specified geth uses the block gas limit from the pending block as an upper bound. As a result the returned estimate might not be enough to executed the call/transaction when the amount of gas is higher than the pending block gas limit.
 
 **Returns**
 
@@ -240,3 +240,32 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"al_estimateGas","params":[{see a
 // Result
 { "id":1, "jsonrpc": "2.0", "result": "0x5208" // 21000 }
 ```
+### al_call
+
+Executes a new message call immediately without creating a transaction on the block chain. Often used for executing read-only smart contract functions, for example the `balanceOf` for an ERC-20 contract.
+
+**Parameters**
+
+1. `Object` - The transaction call object
+
+- `from`: `DATA`, 20 Bytes - (optional) The address the transaction is sent from.
+- `to`: `DATA`, 20 Bytes - The address the transaction is directed to.
+- `gas`: `QUANTITY` - (optional) Integer of the gas provided for the transaction execution. al_call consumes zero gas, but this parameter may be needed by some executions.
+- `gasPrice`: `QUANTITY` - (optional) Integer of the gasPrice used for each paid gas
+- `value`: `QUANTITY` - (optional) Integer of the value sent with this transaction
+- `input`: `DATA` - (optional) Hash of the method signature and encoded parameters. For details see [Ethereum Contract ABI in the Solidity documentation(opens in a new tab)](https://docs.soliditylang.org/en/latest/abi-spec.html).
+
+2. `QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"`, `"pending"`, `"safe"` or `"finalized"`, see [the default block parameter](#the-default-block-parameter).
+
+**Returns**
+
+`DATA` - the return value of executed contract.
+
+**Example**
+```
+// Request 
+curl -X POST --data '{"jsonrpc":"2.0","method":"al_call","params":[{see above}],"id":1}' 
+// Result 
+{ "id":1, "jsonrpc": "2.0", "result": "0x" }
+```
+
