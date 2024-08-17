@@ -38,6 +38,7 @@
         {
           "group": "Tutorials",
           "pages": [
+            "pages/builders/chain/ChainInfo",
             "pages/builders/chain-operators/architecture",
             "pages/builders/app-developers/overview",
             "pages//builders/app-developers/contracts/compatibility",
