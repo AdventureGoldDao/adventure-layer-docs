@@ -53,13 +53,13 @@ This architecture design improves network scalability, performance, and developm
 
 ## Accessing the Nodes
 
-To facilitate seamless interaction with these nodes, The Adventure Layer uses URL routing. Suppose our node domain is `rpc.adventure.dev`. The nodes can be accessed through the following URLs:
+To facilitate seamless interaction with these nodes, The Adventure Layer uses URL routing. Suppose our node domain is `rpc-devnet.adventurelayer.xyz`. The nodes can be accessed through the following URLs:
 
 - **Replica Node:**
-  - **URL:** `http://rpc.adventure.dev/node1/replica`
+  - **URL:** `http://rpc-devnet.adventurelayer.xyz/node1/replica`
   - **Description:** This URL routes requests to the L2 replica node, ensuring efficient data retrieval and redundancy.
 - **Shard Node:**
-  - **URL:** `http://rpc.adventure.dev/node1/shard`
+  - **URL:** `http://rpc-devnet.adventurelayer.xyz/node1/shard`
   - **Description:** This URL routes requests to the shard node that supports WASM, providing a robust environment for executing complex computations and smart contracts.
 
 **Unique Node Identifier:**
