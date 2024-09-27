@@ -9,42 +9,40 @@ import Image from 'next/image'
 
 This page contains information about the components of the rollup protocol and
 how they work together to build the layer 2 blockchain from the Chain Operator's
-perspective. The OP Stack is built in such a way that it is as similar to
-Ethereum as possible. Like Ethereum, the OP Stack has execution and consensus
-clients. The OP Stack also has some privileged roles that produce L2 blocks.
-If you want a more detailed view of the OP Stack protocol, check out the
-[OP Stack section](/stack/getting-started) of our documentation.
+perspective. The Adventure Layer is built in such a way that it is as similar to
+Ethereum as possible. Like Ethereum, the Adventure Layer has execution and consensus
+clients. The Adventure Layer also has some privileged roles that produce L2 blocks.
 
 ## Permissioned Components
 
 These clients and services work together to enable the block production on the L2 network.
-Sequencer nodes (`op-geth` + `op-node`) gather proposed transactions from users.
+Sequencer nodes (`al-geth` + `al-node`) gather proposed transactions from users.
 The batcher submits batch data to L1 which controls the safe blocks and ultimately
 controls the canonical chain. The proposer submits output roots to L1 which control
 L2 to L1 messaging.
 
 <Image src="/public/img/builders/chain-operators/sequencer-diagram.png" alt="Sequencer Component Diagram" width={400} height={400} />
 
-### op-geth
+### al-geth
 
-`op-geth` implements the layer 2 execution layer, with [minimal changes](https://op-geth.optimism.io/)
+`al-geth` implements the layer 2 execution layer, with minimal changes
 for a secure Ethereum-equivalent application environment.
 
-### op-node
+### al-node
 
-`op-node` implements most rollup-specific functionality as the layer 2
-consensus layer, similar to a layer 1 beacon-node. The `op-node` is stateless and gets
-its view of the world from `op-geth`.
+`al-node` implements most rollup-specific functionality as the layer 2
+consensus layer, similar to a layer 1 beacon-node. The `al-node` is stateless and gets
+its view of the world from `al-geth`.
 
-### op-batcher
+### al-batcher
 
-`op-batcher` is the service that submits the L2 Sequencer data to L1, to make it available
+`al-batcher` is the service that submits the L2 Sequencer data to L1, to make it available
 for verifiers. To reduce the cost of writing to the L1, it only posts the minimal
 amount of data required to reproduce L2 blocks.
 
-### op-proposer
+### al-proposer
 
-`op-proposer` is the service that submits the output roots to the L1. This is to enable
+`al-proposer` is the service that submits the output roots to the L1. This is to enable
 trustless execution of L2-to-L1 messaging and creates the view into the L2 state from
 the L1's perspective.
 
