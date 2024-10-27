@@ -83,7 +83,16 @@
              }
 
           ]
+        },
+        {
+          "group": "Adventure Game Library (AGL)",
+          "pages": [
+            "pages/AGL/AGL-Introduction",
+            "pages/AGL/MUD-Introduction",
+            "pages/AGL/AGL-Ticking-System"
+          ]
         }
+
       ]
     }
   ]
