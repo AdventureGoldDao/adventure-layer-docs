@@ -1,0 +1,35 @@
+---
+title: Adventure Game Library (AGL)
+description: The AGL is a dedicated Solidity game library to empower developers to efficiently create fully onchain games(FOCGs). This library is rooted in classic MUD principles but extended with modern architectural patterns such as the Entity Component System (ECS), which supports a more modular and scalable approach to game development.
+---
+
+## Preface: The ECS model
+## What is ECS
+
+ECS is a software architectural pattern used commonly in video game development. It is a data-oriented approach to game development that creates a clean break between data and logic. It does this through the separation of Entities, Components, and Systems:
+
+- **Entities** are the basic units of a game, and they can have any number of components. In a typical MUD implementation each entity is assigned a unique 32-byte identifier that is used as a key to the component tables (see next item).
+- **Components** are small pieces of data that define an entity's behavior (such as position or health). In a typical MUD implementation components are implemented as tables. The table key is the entity identifier, and the value is the data that defines an aspect of the entity such as position.
+- **Systems** are functions responsible for updating the game state and performing operations on entities and their components.
+
+## ECS in AGL:
+
+#### Entities:
+
+AGL’s Store component supports the ECS model well, allowing tables to represent entities, each with a unique key. Components can be fields in these tables, and systems can process these components through contract functions.
+
+#### Components:
+
+Components are smart contracts acting as data storage for entities. For example, an entity like an Ethereum address (e.g., a player’s wallet) may hold properties such as position (x,y) in a Position component, level in a Level component, and tokens in a Token component. Components only contain mappings and configurations.
+
+#### Systems:
+
+Systems are more complex, changing component values and functioning like POST requests for data modifications. Only systems with specific write permissions can modify components. They interact with components to create detailed logic, such as movement or rewards systems, managing actions like player movements and rewards.
+
+**All of this is registered within the World contract**, where each component and system update triggers an event. The World contract is permissionless, allowing anyone to add new systems or components, with possible cross-contract interactions.
+
+## Synchronization of Client and Chain Components
+
+**AGL** uses snapshots to synchronize clients with World states (i.e., component entity values) without processing all historical events, reducing latency and complexity. AGL’s ID system also registers each system and component with an ID in the World contract upon deployment, making it easier to track changes and interact with the game.
+
+As mentioned, each component and system is registered on the World contract, and any changes trigger an event (with IDs for components and entities). Clients can selectively subscribe to specific events instead of listening to all state changes, effectively retrieving needed data for updates and rendering.

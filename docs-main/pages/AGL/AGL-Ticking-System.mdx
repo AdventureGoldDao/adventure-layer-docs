@@ -1,0 +1,29 @@
+---
+title: Parallel Ticking System in AGL
+---
+
+# Introduction of the Parallel Ticking System
+
+In traditional game development, the concept of "ticking" is fundamental, serving as the heartbeat of any interactive application. A tick refers to a single iteration of the game loop, where various elements of the game—such as physics calculations, AI decisions, player inputs, and rendering updates—are processed. This mechanism ensures that the game world remains dynamic and responsive to user interactions and systemic changes. The frequency of these ticks, or the tick rate, directly influences the fluidity and responsiveness of the gameplay experience. Higher tick rates can lead to smoother animations and more precise control, which are crucial in fast-paced games that demand quick reflexes and timely decision-making.
+
+However, as games become more complex, featuring vast worlds filled with intricate interactions and numerous entities, the computational load of processing each tick increases significantly. Managing this computational load efficiently becomes even more challenging in decentralized environments like blockchain-based gaming, where game logic must be validated across a distributed network. The need to maintain a consistent and high-performance tick rate without overloading network resources or compromising gameplay quality is a critical concern. This is where innovative solutions such as the Parallel Ticking System come into play, addressing these challenges head-on by optimizing how game logic is executed across the distributed nodes of a blockchain network.
+
+The **Adventure Game Library (AGL)** in **The Adventure Layer** is a pivotal component designed to empower developers to create FOCGs. Building upon the foundation of classic MUD principles and incorporating the modern Entity Component System (ECS), AGL supports a highly modular and scalable approach to game development. A significant enhancement to this architecture is the introduction of the **Parallel Ticking System**. This system is meticulously designed to optimize the performance of game logic execution across multiple cores within each shard, enabling high-performance, real-time gaming experiences.
+# Benefits of the Parallel Ticking System
+
+The introduction of the Parallel Ticking System within the AGL provides several key advantages:
+
+- **Enhanced Performance**: By enabling parallel game logic processing, the system significantly reduces latency and increases throughput, essential for real-time interactive gaming experiences.
+    
+- **Scalability**: The stateless design and namespace-based component management allow the system to scale efficiently as game complexity and player numbers increase.
+    
+- **Flexibility and Modularity**: The component design's self-contained nature allows developers to easily add or modify components without impacting other parts of the game.
+    
+- **Robust Data Integrity**: The use of Merkle tree-like storage ensures that all game states are secure and verifiable, enhancing the gaming platform's overall security.
+    
+
+- **Only available under ECS architecture**: A simplified way to understand our parallel ticking system design is that it is a globally synchronized transaction initiator, where all components assigned to the same system will initiate transactions to update their state in a parallelized way. This benefits all the applications designed under the ECS framework, which is an industry standard in the gaming space.
+
+![](https://wp.adventurelayer.dev/~gitbook/image?url=https%3A%2F%2Flh7-us.googleusercontent.com%2Fdocsz%2FAD_4nXdu8UWqNZ0K1uDi3Jox9WIHiO6K594OVRvbNmJ24bV57iPyo-aVnI4unw30XT6DFzNMzO_ePZ5KIXvjQbqQjGaY3E780Iew3RydeVfISx1sNTA4r_QZPQBdqbwlXauIwHtlYa-BwZgtTb_0zWAc%3Fkey%3DMX1cCxpr6-qyzTQezewHqQ&width=768&dpr=4&quality=100&sign=d85f8f91&sv=1)
+
+This architectural enhancement positions **The Adventure Layer** as a leading platform for blockchain-based gaming, setting new standards for performance and scalability in the industry. By leveraging modern server architectures to their fullest potential, the Parallel Ticking System offers a promising solution to the challenges of onchain game development.
