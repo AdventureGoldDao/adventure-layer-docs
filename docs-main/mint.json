@@ -88,8 +88,9 @@
           "group": "Adventure Game Library (AGL)",
           "pages": [
             "pages/AGL/AGL-Introduction",
-            "pages/AGL/MUD-Introduction",
-            "pages/AGL/AGL-Ticking-System"
+            "pages/AGL/AGL-Ticking-System",
+            "pages/AGL/SnakeDemo",
+            "pages/AGL/HowToUseECS"
           ]
         }
 
