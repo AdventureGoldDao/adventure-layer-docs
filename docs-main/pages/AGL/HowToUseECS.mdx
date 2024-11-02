@@ -1,0 +1,65 @@
+
+# How to Use Our ECS Project
+
+### 1) Create Demo Project Using Command
+
+To create a demo project, you typically use a command-line tool or script. In your setup, it seems like you might use a tool like `mud` to initialize a project. This is not explicitly shown in the code snippets, but it would typically involve a command like:
+
+```bash
+mud init demo-project
+```
+
+### 2) Add Tables and Contracts
+
+To add a table and contract, you need to define them in your configuration and codebase. For example, in your `mud.config.ts` file, you define tables like this:
+
+```typescript
+tables: {
+  Users: {
+    schema: {
+      player: "address",
+      gameCode: "uint32",
+      score: "uint32",
+      username: "string",
+    },
+    key: ["player"],
+  },
+  GameCodeToGameState: {
+    schema: {
+      gameCode: "uint32",
+      players: "address[]",
+    },
+    key: ["gameCode"],
+  }
+}
+```
+
+For contracts, you would create new Solidity files in the `src/systems` or `src/codegen` directories and define your contract logic there.
+
+### 3) How to Generate Automated Code
+
+Automated code generation can be done using scripts or tools that read your configuration and generate the necessary code files. In your setup, this might involve running a build script that uses the `mud` tool to generate code based on your `mud.config.ts`.
+
+```json
+"build": "mud build",
+"clean": "forge clean && shx rm -rf src/**/codegen",
+```
+
+### 4) Modify Heartbeat Contract
+
+To modify a heartbeat contract, you would typically edit the Solidity file where the contract is defined. The heartbeat mechanism might be implemented in a contract that periodically triggers certain actions, such as refreshing game state or generating new game elements.
+
+### 5) How to Compile and Deploy
+
+To compile and deploy your contracts, you can use the scripts defined in your `package.json`. For example, you might have scripts like these:
+
+```json
+"deploy:dev": "mud deploy --profile=dev",
+"deploy:local": "mud deploy",
+"deploy:prod": "mud deploy --profile=prod",
+```
+
+- **Compile**: Run `npm run build` or `pnpm run build` to compile your contracts.
+- **Deploy**: Use `npm run deploy:dev` or `npm run deploy:prod` to deploy your contracts to the desired network.
+
+These steps should guide you through using your ECS setup effectively. If you have specific questions about any step, feel free to ask!

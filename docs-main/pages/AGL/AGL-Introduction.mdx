@@ -33,3 +33,52 @@ Systems are more complex, changing component values and functioning like POST re
 **AGL** uses snapshots to synchronize clients with World states (i.e., component entity values) without processing all historical events, reducing latency and complexity. AGL’s ID system also registers each system and component with an ID in the World contract upon deployment, making it easier to track changes and interact with the game.
 
 As mentioned, each component and system is registered on the World contract, and any changes trigger an event (with IDs for components and entities). Clients can selectively subscribe to specific events instead of listening to all state changes, effectively retrieving needed data for updates and rendering.
+
+## Introduction of MUD
+
+MUD is a framework for ambitious onchain applications. It reduces the complexity of building Ethereum apps with a tightly integrated software stack.MUD primarily offers the following functionalities。
+
+### Store:
+
+Store is an alternative to Solidity's storage engine. It enforces a data model that can be mapped directly to a relational database, enables automatic indexing by emitting a common set of events for each mutation, and packs data more tightly than native Solidity. It also allows external contract storage to be read onchain without being limited by existing view functions and without a new opcode.
+
+### World:
+
+Store provides low-level primitives for storage. World provides the primitives for logic and access control on top of that storage.
+Calls are sent to the World as a central entry point. The World performs access control checks and if the request is authorized, sends it to the appropriate System. In most cases access from the System to the tables that store the data also goes through the World (except for root systems). The System contracts themselves are stateless, all the data is managed by the World.
+
+### Config:
+
+The mud.config.ts file is where a MUD project begins. It defines the resources (namespaces, tables, systems, and modules) used by your app and how MUD should codegen and deploy them. Its output is strongly typed for better type safety and developer experience in the form of hinting, inference, and autocomplete.
+
+### CLI:
+
+1. **mud tablegen**: Autogenerate MUD Store table libraries based on the config file.
+2. **mud worldgen**: Autogenerate the MUD World interface based on Systems registered in the World.
+3. **mud test**: This command runs the tests in a MUD project.
+4. **mud deploy**: This command deploys a MUD app to a blockchain.
+5. **mud verify**: This command uploads the source code for the deployed contracts to a public repository, such as a block explorer. The repository then compiles the source code and verifies that the compiled version is identical to what is deployed onchain.
+6. **mud dev-contracts**: Start a development server for MUD contracts, and redeploy or modify the `World` when contracts change.
+7. **mud abi-ts**: This command converts JSON files that contain the ABI to TypeScript with strong types so they can be used to infer types for tools like viem or wagmi.
+8. **mud set-version**: Set version for all MUD packages used in the current workspace.
+
+### State Query:
+
+Provides a query language for interacting with contract states; achieves state synchronization between contracts and clients without requiring manual network code.
+
+###  MUD Indexer:
+
+The MUD Indexer is an offchain indexer for onchain applications built with MUD.
+The MUD indexer solves this problem by listening to the MUD store events to automatically replicate the entire onchain state in a relational database. Having such a database allows clients to quickly and efficiently query the onchain data.
+
+### World Explorer:
+
+World Explorer is a GUI tool designed for visually exploring and manipulating the state of worlds.
+
+### **Core Ideas of MUD**
+
+MUD is a highly collaborative library and toolkit designed for complex on-chain applications, centered around three core ideas:
+
+1. **All on-chain states are stored in MUD's embedded database, Store**: Store is similar to SQLite, structured with tables, columns, and rows. It allows for more organized data management without relying on Solidity's storage methods and supports dynamic table creation and automatic indexing.
+2. **Logic is stateless and uses custom permissions for cross-contract segregation**: The "World" acts as an entry point, coordinating access to the Store. Each World creates a Store with tables registered under specific namespaces, enabling systems (stateless contracts) to read/write data.
+3. **No need for indexers or subgraphs, enabling front-end synchronization**: The Store automatically introspects changes, broadcasting them via standard events. Using MODE nodes, it quickly converts on-chain states into an SQL database. MUD also offers tools like QDSL and GraphQL for simplified front-end synchronization, with React-specific hooks for automatic state updates.

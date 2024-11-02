@@ -27,3 +27,13 @@ The introduction of the Parallel Ticking System within the AGL provides several 
 ![](https://wp.adventurelayer.dev/~gitbook/image?url=https%3A%2F%2Flh7-us.googleusercontent.com%2Fdocsz%2FAD_4nXdu8UWqNZ0K1uDi3Jox9WIHiO6K594OVRvbNmJ24bV57iPyo-aVnI4unw30XT6DFzNMzO_ePZ5KIXvjQbqQjGaY3E780Iew3RydeVfISx1sNTA4r_QZPQBdqbwlXauIwHtlYa-BwZgtTb_0zWAc%3Fkey%3DMX1cCxpr6-qyzTQezewHqQ&width=768&dpr=4&quality=100&sign=d85f8f91&sv=1)
 
 This architectural enhancement positions **The Adventure Layer** as a leading platform for blockchain-based gaming, setting new standards for performance and scalability in the industry. By leveraging modern server architectures to their fullest potential, the Parallel Ticking System offers a promising solution to the challenges of onchain game development.
+
+## Heartbeat Implementation Mechanism
+
+The heartbeat mechanism is a critical component of the Parallel Ticking System, ensuring that game logic is consistently and reliably executed on the blockchain. In our system, Nitro introduces a timer that triggers every 30 milliseconds, calling a fixed smart contract function known as `adventureHeartbeat`. This function serves as a central hub where different game projects can register their heartbeat contracts. By doing so, it effectively drives the on-chain game logic of various projects, ensuring that all game states are updated in a timely manner.
+
+## Accelerated Block Production
+
+A key feature of our system is the ability to accelerate block production, which is crucial for the rapid execution of heartbeat contracts. By leveraging a dedicated shard, we can adjust the `max-block-speed` parameter in Arbitrum, reducing the block production interval to as low as 30 milliseconds. This ensures that the heartbeat contracts are invoked swiftly, maintaining the high-frequency updates required for real-time gaming experiences. This optimization is essential for supporting the fast-paced nature of modern games, where quick reflexes and timely decision-making are paramount. By ensuring rapid block production, we enhance the overall responsiveness and performance of the gaming platform.
+
+
