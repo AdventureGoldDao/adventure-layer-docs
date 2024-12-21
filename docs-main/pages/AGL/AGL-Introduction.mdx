@@ -1,6 +1,6 @@
 ---
 title: Adventure Game Library (AGL)
-description: The AGL is a dedicated Solidity game library to empower developers to efficiently create fully onchain games(FOCGs). This library is rooted in classic MUD principles but extended with modern architectural patterns such as the Entity Component System (ECS), which supports a more modular and scalable approach to game development.
+description: The AGL is a dedicated Solidity game library to empower developers to efficiently create fully onchain games(FOCGs). This library is rooted in classic MUD principles but extended with modern architectural patterns such as the Entity Component System (ECS), which supports a more modular and scalable approach to game development.Additionally, we have made improvements to the MUD code to enhance its functionality and performance.
 ---
 
 ## Preface: The ECS model
@@ -35,3 +35,6 @@ Systems are more complex, changing component values and functioning like POST re
 As mentioned, each component and system is registered on the World contract, and any changes trigger an event (with IDs for components and entities). Clients can selectively subscribe to specific events instead of listening to all state changes, effectively retrieving needed data for updates and rendering.
 
 
+## MUD Code Improvements
+
+- [MUD Improvement Codebase](https://github.com/AdventureGoldDao/adventure-engine/tree/audit) - Visit our GitHub repository to explore the specific improvements in detail.

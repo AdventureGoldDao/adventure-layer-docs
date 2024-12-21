@@ -31,6 +31,7 @@ This architectural enhancement positions **The Adventure Layer** as a leading pl
 ## Heartbeat Implementation Mechanism
 
 The heartbeat mechanism is a critical component of the Parallel Ticking System, ensuring that game logic is consistently and reliably executed on the blockchain. In our system, Nitro introduces a timer that triggers every 30 milliseconds, calling a fixed smart contract function known as `adventureHeartbeat`. This function serves as a central hub where different game projects can register their heartbeat contracts. By doing so, it effectively drives the on-chain game logic of various projects, ensuring that all game states are updated in a timely manner.
+You can see the implementation here: [source code](https://github.com/AdventureGoldDao/adventure-layer-shards/blob/a5e72d052ac6f64096d7b67d8e11add170aedead/go-ethereum/internal/ethapi/api.go#L230).
 
 ## Accelerated Block Production
 
