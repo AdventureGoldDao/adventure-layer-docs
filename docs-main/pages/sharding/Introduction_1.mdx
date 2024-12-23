@@ -11,6 +11,9 @@ The Adventure Layer employs sharding to distribute the transaction load across m
 
 1. **Shard Manager**: Dynamically allocates transactions to various shards based on load and computational complexity, optimizing resource usage across the network.
 2. **Cross-Shard Communication System**: Enables seamless interaction between shards, ensuring data consistency and integrity without sacrificing operational speed.
+- [Frontend Key Code](https://github.com/AdventureGoldDao/adventure-layer-bridge-web/blob/audit/packages/react-app/src/pages/bridge/transfer.js#L81)
+- [Backend Key Code](https://github.com/AdventureGoldDao/adventure-layer-bridge-backend/blob/audit/listen_service/listen.js#L101)
+
 3. **Shared State Architecture**: Maintains a coherent view of the state across all shards, facilitated by the Shard-Sharing State infrastructure, which supports real-time, cross-shard read/write operations.
 
 **Shard Forking System**: Introduces a seamless transition mechanism between Playground and Player shards, allowing game developers to easily clone the state and progress of a game from a Playground shard to a Player shard. This system ensures smooth upgrades and iterations of games without disrupting the player experience and facilitates the rapid deployment of new features and bug fixes.

@@ -35,6 +35,8 @@ Systems are more complex, changing component values and functioning like POST re
 As mentioned, each component and system is registered on the World contract, and any changes trigger an event (with IDs for components and entities). Clients can selectively subscribe to specific events instead of listening to all state changes, effectively retrieving needed data for updates and rendering.
 
 
-## MUD Code Improvements
+## Adventure Engine Tool
 
-- [MUD Improvement Codebase](https://github.com/AdventureGoldDao/adventure-engine/tree/audit) - Visit our GitHub repository to explore the specific improvements in detail.
+- [Adventure Engine Tool Key Code](https://github.com/AdventureGoldDao/adventure-engine/blob/audit/packages/create-adventure-engine/src/cli.ts#L9) - Visit our GitHub repository to explore the specific improvements in detail.
+- We have developed an Adventure Engine scaffolding for quickly creating AGL projects, and automatically created a series of template interfaces(https://github.com/AdventureGoldDao/adventure-engine/blob/audit/templates/react-ecs/packages/contracts/src/systems/AdventureLayerSystem.sol#L10), 
+such as adventureHeatbeat, adventureAccountLogin, adventureStartGame, and adventureEndGame, which correspond to account login and heartbeat-related logic. Developers can customize their own game logic based on this template, which is very convenient.
