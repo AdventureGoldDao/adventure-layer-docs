@@ -92,7 +92,9 @@
             "pages/AGL/SnakeDemo",
             "pages/AGL/HowToUseECS"
           ]
-        }
+        },
+        "Contracts",
+        "Stats"
 
       ]
     }
